@@ -84,7 +84,7 @@ locals {
     "virtualnetwork"                     = "VirtualNetwork"
   }
 
-  predefined_rules = {
+  rule_configurations = {
     "DenyInternetInBound" = {
       "priority"                                   = 4096
       "direction"                                  = local.direction.inbound
@@ -106,6 +106,8 @@ locals {
       "destination_address_prefixes"               = local.service_tags.internet
     }
   }
+
+  rule_names = keys(local.rule_configurations)
 }
 
 
