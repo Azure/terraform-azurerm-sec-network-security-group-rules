@@ -1,4 +1,4 @@
-output "names"{
+output "names" {
   value = local.rule_names
 }
 
