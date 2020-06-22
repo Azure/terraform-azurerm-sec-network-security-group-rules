@@ -17,7 +17,7 @@ locals {
   }
 
   entire_port_range    = "*"
-  enitre_address_range = "0.0.0.0/0"
+  entire_address_range = "0.0.0.0/0"
 
   service_tags = {
     "actiongroup"                        = "ActionGroup",
