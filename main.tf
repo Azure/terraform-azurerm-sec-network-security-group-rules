@@ -89,25 +89,25 @@ locals {
       "direction"                  = local.direction.inbound
       "access"                     = local.access.deny
       "protocol"                   = local.protocol.any
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.internet
-      "destination_port_ranges"    = [local.entire_port_range]
+      "destination_port_ranges"    = local.entire_port_range
       "destination_address_prefix" = local.service_tags.virtualnetwork
     },
     "DenyInternetOutbound" = {
       "direction"                  = local.direction.outbound
       "access"                     = local.access.deny
       "protocol"                   = local.protocol.any
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.virtualnetwork
-      "destination_port_ranges"    = [local.entire_port_range]
+      "destination_port_range"     = local.entire_port_range
       "destination_address_prefix" = local.service_tags.internet
     },
     "AllowHTTPInbound" = {
       "direction"                  = local.direction.inbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.internet
       "destination_port_ranges"    = ["80"]
       "destination_address_prefix" = local.service_tags.virtualnetwork
@@ -116,7 +116,7 @@ locals {
       "direction"                  = local.direction.inbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.internet
       "destination_port_ranges"    = ["443"]
       "destination_address_prefix" = local.service_tags.virtualnetwork
@@ -125,7 +125,7 @@ locals {
       "direction"                  = local.direction.inbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.apimanagement
       "destination_port_ranges"    = ["3443"]
       "destination_address_prefix" = local.service_tags.virtualnetwork
@@ -134,7 +134,7 @@ locals {
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.virtualnetwork
       "destination_port_ranges"    = ["443"]
       "destination_address_prefix" = local.service_tags.storage
@@ -143,7 +143,7 @@ locals {
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.virtualnetwork
       "destination_port_ranges"    = ["443"]
       "destination_address_prefix" = local.service_tags.azureactivedirectory
@@ -152,7 +152,7 @@ locals {
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.virtualnetwork
       "destination_port_ranges"    = ["1443"]
       "destination_address_prefix" = local.service_tags.sql
@@ -161,7 +161,7 @@ locals {
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.virtualnetwork
       "destination_port_ranges"    = ["443", "5672", "5671"]
       "destination_address_prefix" = local.service_tags.eventhub
@@ -170,7 +170,7 @@ locals {
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.virtualnetwork
       "destination_port_ranges"    = ["445"]
       "destination_address_prefix" = local.service_tags.storage
@@ -179,7 +179,7 @@ locals {
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.virtualnetwork
       "destination_port_ranges"    = ["443"]
       "destination_address_prefix" = local.service_tags.azurecloud
@@ -188,7 +188,7 @@ locals {
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.virtualnetwork
       "destination_port_ranges"    = ["443", "1886"]
       "destination_address_prefix" = local.service_tags.azuremonitor
@@ -197,7 +197,7 @@ locals {
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.virtualnetwork
       "destination_port_ranges"    = ["25", "587", "25028"]
       "destination_address_prefix" = local.service_tags.internet
@@ -206,7 +206,7 @@ locals {
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.virtualnetwork
       "destination_port_ranges"    = ["6381", "6382", "6383"]
       "destination_address_prefix" = local.service_tags.virtualnetwork
@@ -215,7 +215,7 @@ locals {
       "direction"                  = local.direction.inbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.virtualnetwork
       "destination_port_ranges"    = ["6381", "6382", "6383"]
       "destination_address_prefix" = local.service_tags.virtualnetwork
@@ -224,7 +224,7 @@ locals {
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.udp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.virtualnetwork
       "destination_port_ranges"    = ["4290"]
       "destination_address_prefix" = local.service_tags.virtualnetwork
@@ -233,7 +233,7 @@ locals {
       "direction"                  = local.direction.inbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.udp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.virtualnetwork
       "destination_port_ranges"    = ["4290"]
       "destination_address_prefix" = local.service_tags.virtualnetwork
@@ -242,9 +242,9 @@ locals {
       "direction"                  = local.direction.inbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
-      "source_port_ranges"         = [local.entire_port_range]
+      "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.azureloadbalancer
-      "destination_port_ranges"    = [local.entire_port_range]
+      "destination_port_range"     = local.entire_port_range
       "destination_address_prefix" = local.service_tags.virtualnetwork
     }
   }
