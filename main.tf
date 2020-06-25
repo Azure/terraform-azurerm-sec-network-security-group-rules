@@ -86,7 +86,6 @@ locals {
 
   rule_configurations = {
     "DenyInternetInbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.inbound
       "access"                     = local.access.deny
       "protocol"                   = local.protocol.any
@@ -96,7 +95,6 @@ locals {
       "destination_address_prefix" = local.service_tags.virtualnetwork
     },
     "DenyInternetOutbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.outbound
       "access"                     = local.access.deny
       "protocol"                   = local.protocol.any
@@ -106,7 +104,6 @@ locals {
       "destination_address_prefix" = local.service_tags.internet
     },
     "AllowHTTPInbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.inbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
@@ -116,7 +113,6 @@ locals {
       "destination_address_prefix" = local.service_tags.virtualnetwork
     },
     "AllowHTTPSInbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.inbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
@@ -126,7 +122,6 @@ locals {
       "destination_address_prefix" = local.service_tags.virtualnetwork
     },
     "AllowAPIManagementManagementEndpointInbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.inbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
@@ -136,7 +131,6 @@ locals {
       "destination_address_prefix" = local.service_tags.virtualnetwork
     },
     "AllowStorageOutbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
@@ -146,7 +140,6 @@ locals {
       "destination_address_prefix" = local.service_tags.storage
     },
     "AllowAzureActiveDirectoryOutbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
@@ -156,7 +149,6 @@ locals {
       "destination_address_prefix" = local.service_tags.azureactivedirectory
     },
     "AllowSQLOutbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
@@ -166,7 +158,6 @@ locals {
       "destination_address_prefix" = local.service_tags.sql
     },
     "AllowEventHubOutbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
@@ -176,7 +167,6 @@ locals {
       "destination_address_prefix" = local.service_tags.eventhub
     },
     "AllowAzureFileShareOutbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
@@ -186,7 +176,6 @@ locals {
       "destination_address_prefix" = local.service_tags.storage
     },
     "AllowHealthMonitoringOutbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
@@ -196,7 +185,6 @@ locals {
       "destination_address_prefix" = local.service_tags.azurecloud
     },
     "AllowAzureMonitorOutbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
@@ -206,7 +194,6 @@ locals {
       "destination_address_prefix" = local.service_tags.azuremonitor
     },
     "AllowSMTPOutbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
@@ -216,7 +203,6 @@ locals {
       "destination_address_prefix" = local.service_tags.internet
     },
     "AllowAPIManagementRedisCacheOutbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
@@ -226,7 +212,6 @@ locals {
       "destination_address_prefix" = local.service_tags.virtualnetwork
     },
     "AllowAPIManagementRateLimitCounterOutbound" = {
-      "priority"                   = 4096
       "direction"                  = local.direction.outbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
