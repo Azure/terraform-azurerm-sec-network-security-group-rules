@@ -211,13 +211,40 @@ locals {
       "destination_port_ranges"    = ["6381", "6382", "6383"]
       "destination_address_prefix" = local.service_tags.virtualnetwork
     },
-    "AllowAPIManagementRateLimitCounterOutbound" = {
-      "direction"                  = local.direction.outbound
+    "AllowAPIManagementRedisCacheInbound" = {
+      "direction"                  = local.direction.inbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
       "source_port_ranges"         = [local.entire_port_range]
       "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["6381", "6382", "6383"]
+      "destination_address_prefix" = local.service_tags.virtualnetwork
+    },
+    "AllowAPIManagementRateLimitingOutbound" = {
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.udp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
       "destination_port_ranges"    = ["4290"]
+      "destination_address_prefix" = local.service_tags.virtualnetwork
+    },
+    "AllowAPIManagementRateLimitingInbound" = {
+      "direction"                  = local.direction.inbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.udp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["4290"]
+      "destination_address_prefix" = local.service_tags.virtualnetwork
+    },
+    "AllowLoadBalancerInbound" = {
+      "direction"                  = local.direction.inbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.loadbalancer
+      "destination_port_ranges"    = [local.entire_port_range]
       "destination_address_prefix" = local.service_tags.virtualnetwork
     }
   }
