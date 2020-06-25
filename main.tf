@@ -238,7 +238,7 @@ locals {
       "destination_port_ranges"    = ["4290"]
       "destination_address_prefix" = local.service_tags.virtualnetwork
     },
-    "AllowAPIManagementRateLimitingInbound" = {
+    "AllowLoadBalancerInbound" = {
       "direction"                  = local.direction.inbound
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
