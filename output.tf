@@ -7,9 +7,9 @@ output "configurations" {
 }
 
 output "deny_internet_inbound" {
-  value = local.rule_configurations.DenyInternetInBound
+  value = local.rule_configurations.DenyInternetInbound
 }
 
 output "deny_internet_outbound" {
-  value = local.rule_configurations.DenyInternetOutBound
+  value = local.rule_configurations.DenyInternetOutbound
 }
