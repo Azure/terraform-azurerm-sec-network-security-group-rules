@@ -243,7 +243,7 @@ locals {
       "access"                     = local.access.allow
       "protocol"                   = local.protocol.tcp
       "source_port_ranges"         = [local.entire_port_range]
-      "source_address_prefix"      = local.service_tags.loadbalancer
+      "source_address_prefix"      = local.service_tags.azureloadbalancer
       "destination_port_ranges"    = [local.entire_port_range]
       "destination_address_prefix" = local.service_tags.virtualnetwork
     }
