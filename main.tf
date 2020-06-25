@@ -85,25 +85,155 @@ locals {
   }
 
   rule_configurations = {
-    "DenyInternetInBound" = {
+    "DenyInternetInbound" = {
       "priority"                   = 4096
       "direction"                  = local.direction.inbound
       "access"                     = local.access.deny
       "protocol"                   = local.protocol.any
-      "source_port_range"          = local.entire_port_range
+      "source_port_ranges"         = [local.entire_port_range]
       "source_address_prefix"      = local.service_tags.internet
-      "destination_port_range"     = local.entire_port_range
+      "destination_port_ranges"    = [local.entire_port_range]
       "destination_address_prefix" = local.service_tags.virtualnetwork
     },
-    "DenyInternetOutBound" = {
+    "DenyInternetOutbound" = {
       "priority"                   = 4096
       "direction"                  = local.direction.outbound
       "access"                     = local.access.deny
       "protocol"                   = local.protocol.any
-      "source_port_range"          = local.entire_port_range
+      "source_port_ranges"         = [local.entire_port_range]
       "source_address_prefix"      = local.service_tags.virtualnetwork
-      "destination_port_range"     = local.entire_port_range
+      "destination_port_ranges"    = [local.entire_port_range]
       "destination_address_prefix" = local.service_tags.internet
+    },
+    "AllowHTTPInbound" = {
+      "priority"                   = 4096
+      "direction"                  = local.direction.inbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.internet
+      "destination_port_ranges"    = ["80"]
+      "destination_address_prefix" = local.service_tags.virtualnetwork
+    },
+    "AllowHTTPSInbound" = {
+      "priority"                   = 4096
+      "direction"                  = local.direction.inbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.internet
+      "destination_port_ranges"    = ["443"]
+      "destination_address_prefix" = local.service_tags.virtualnetwork
+    },
+    "AllowAPIManagementManagementEndpointInbound" = {
+      "priority"                   = 4096
+      "direction"                  = local.direction.inbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.apimanagement
+      "destination_port_ranges"    = ["3443"]
+      "destination_address_prefix" = local.service_tags.virtualnetwork
+    },
+    "AllowStorageOutbound" = {
+      "priority"                   = 4096
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["443"]
+      "destination_address_prefix" = local.service_tags.storage
+    },
+    "AllowAzureActiveDirectoryOutbound" = {
+      "priority"                   = 4096
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["443"]
+      "destination_address_prefix" = local.service_tags.azureactivedirectory
+    },
+    "AllowSQLOutbound" = {
+      "priority"                   = 4096
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["1443"]
+      "destination_address_prefix" = local.service_tags.sql
+    },
+    "AllowEventHubOutbound" = {
+      "priority"                   = 4096
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["443", "5672", "5671"]
+      "destination_address_prefix" = local.service_tags.eventhub
+    },
+    "AllowAzureFileShareOutbound" = {
+      "priority"                   = 4096
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["445"]
+      "destination_address_prefix" = local.service_tags.storage
+    },
+    "AllowHealthMonitoringOutbound" = {
+      "priority"                   = 4096
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["443"]
+      "destination_address_prefix" = local.service_tags.azurecloud
+    },
+    "AllowAzureMonitorOutbound" = {
+      "priority"                   = 4096
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["443", "1886"]
+      "destination_address_prefix" = local.service_tags.azuremonitor
+    },
+    "AllowSMTPOutbound" = {
+      "priority"                   = 4096
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["25", "587", "25028"]
+      "destination_address_prefix" = local.service_tags.internet
+    },
+    "AllowAPIManagementRedisCacheOutbound" = {
+      "priority"                   = 4096
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["6381", "6382", "6383"]
+      "destination_address_prefix" = local.service_tags.virtualnetwork
+    },
+    "AllowAPIManagementRateLimitCounterOutbound" = {
+      "priority"                   = 4096
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["4290"]
+      "destination_address_prefix" = local.service_tags.virtualnetwork
     }
   }
 
