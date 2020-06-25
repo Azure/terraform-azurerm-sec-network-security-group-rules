@@ -85,25 +85,140 @@ locals {
   }
 
   rule_configurations = {
-    "DenyInternetInBound" = {
-      "priority"                   = 4096
+    "DenyInternetInbound" = {
       "direction"                  = local.direction.inbound
       "access"                     = local.access.deny
       "protocol"                   = local.protocol.any
-      "source_port_range"          = local.entire_port_range
+      "source_port_ranges"         = [local.entire_port_range]
       "source_address_prefix"      = local.service_tags.internet
-      "destination_port_range"     = local.entire_port_range
+      "destination_port_ranges"    = [local.entire_port_range]
       "destination_address_prefix" = local.service_tags.virtualnetwork
     },
-    "DenyInternetOutBound" = {
-      "priority"                   = 4096
+    "DenyInternetOutbound" = {
       "direction"                  = local.direction.outbound
       "access"                     = local.access.deny
       "protocol"                   = local.protocol.any
-      "source_port_range"          = local.entire_port_range
+      "source_port_ranges"         = [local.entire_port_range]
       "source_address_prefix"      = local.service_tags.virtualnetwork
-      "destination_port_range"     = local.entire_port_range
+      "destination_port_ranges"    = [local.entire_port_range]
       "destination_address_prefix" = local.service_tags.internet
+    },
+    "AllowHTTPInbound" = {
+      "direction"                  = local.direction.inbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.internet
+      "destination_port_ranges"    = ["80"]
+      "destination_address_prefix" = local.service_tags.virtualnetwork
+    },
+    "AllowHTTPSInbound" = {
+      "direction"                  = local.direction.inbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.internet
+      "destination_port_ranges"    = ["443"]
+      "destination_address_prefix" = local.service_tags.virtualnetwork
+    },
+    "AllowAPIManagementManagementEndpointInbound" = {
+      "direction"                  = local.direction.inbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.apimanagement
+      "destination_port_ranges"    = ["3443"]
+      "destination_address_prefix" = local.service_tags.virtualnetwork
+    },
+    "AllowStorageOutbound" = {
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["443"]
+      "destination_address_prefix" = local.service_tags.storage
+    },
+    "AllowAzureActiveDirectoryOutbound" = {
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["443"]
+      "destination_address_prefix" = local.service_tags.azureactivedirectory
+    },
+    "AllowSQLOutbound" = {
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["1443"]
+      "destination_address_prefix" = local.service_tags.sql
+    },
+    "AllowEventHubOutbound" = {
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["443", "5672", "5671"]
+      "destination_address_prefix" = local.service_tags.eventhub
+    },
+    "AllowAzureFileShareOutbound" = {
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["445"]
+      "destination_address_prefix" = local.service_tags.storage
+    },
+    "AllowHealthMonitoringOutbound" = {
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["443"]
+      "destination_address_prefix" = local.service_tags.azurecloud
+    },
+    "AllowAzureMonitorOutbound" = {
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["443", "1886"]
+      "destination_address_prefix" = local.service_tags.azuremonitor
+    },
+    "AllowSMTPOutbound" = {
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["25", "587", "25028"]
+      "destination_address_prefix" = local.service_tags.internet
+    },
+    "AllowAPIManagementRedisCacheOutbound" = {
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["6381", "6382", "6383"]
+      "destination_address_prefix" = local.service_tags.virtualnetwork
+    },
+    "AllowAPIManagementRateLimitCounterOutbound" = {
+      "direction"                  = local.direction.outbound
+      "access"                     = local.access.allow
+      "protocol"                   = local.protocol.tcp
+      "source_port_ranges"         = [local.entire_port_range]
+      "source_address_prefix"      = local.service_tags.virtualnetwork
+      "destination_port_ranges"    = ["4290"]
+      "destination_address_prefix" = local.service_tags.virtualnetwork
     }
   }
 
