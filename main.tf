@@ -91,7 +91,7 @@ locals {
       "protocol"                   = local.protocol.any
       "source_port_range"          = local.entire_port_range
       "source_address_prefix"      = local.service_tags.internet
-      "destination_port_ranges"    = local.entire_port_range
+      "destination_port_range"     = local.entire_port_range
       "destination_address_prefix" = local.service_tags.virtualnetwork
     },
     "DenyInternetOutbound" = {
